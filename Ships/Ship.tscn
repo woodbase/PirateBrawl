@@ -1,0 +1,14 @@
+[gd_scene format=2]
+
+[node name="Ship" type="KinematicBody2D"]
+
+[node name="Hull" type="Sprite" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="Canon" type="Sprite" parent="."]
+
+[node name="Muzzle" type="Position2D" parent="Canon"]
+
+[node name="CanonTimer" type="Timer" parent="."]
+

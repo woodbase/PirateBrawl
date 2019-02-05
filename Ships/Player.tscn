@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Ships/Ship.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Ships/Player.gd" type="Script" id=2]
+[ext_resource path="res://assets/shipsMiscellaneous_sheet.png" type="Texture" id=3]
+
+[sub_resource type="CapsuleShape2D" id=1]
+
+radius = 22.769
+height = 56.5901
+
+[node name="Player" index="0" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+Speed = 200
+Health = 100
+CanonReload = 0.4
+RotationSpeed = 1.0
+
+[node name="Hull" parent="." index="0"]
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 307, 889, 113, 66 )
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2( 0.577805, -0.101746 )
+rotation = 1.5708
+shape = SubResource( 1 )
+
+[node name="Canon" parent="." index="2"]
+position = Vector2( 18.908, -11.0578 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 489, 586, 20, 29 )
+
+[node name="Muzzle" parent="Canon" index="0"]
+position = Vector2( 0.143593, -13.212 )
+
