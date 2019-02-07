@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://ships/Ship.tscn" type="PackedScene" id=1]
+[ext_resource path="res://ships/PatrolBoat.gd" type="Script" id=2]
+[ext_resource path="res://assets/shipsMiscellaneous_sheet.png" type="Texture" id=3]
+
+[sub_resource type="CapsuleShape2D" id=1]
+
+radius = 17.5152
+height = 67.9444
+
+[sub_resource type="RectangleShape2D" id=2]
+
+extents = Vector2( 214.511, 21.2711 )
+
+[node name="PatrolBoat" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="Hull" parent="." index="0"]
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 115, 549, 113, 66 )
+
+[node name="CollisionShape2D" parent="." index="1"]
+rotation = 1.5708
+shape = SubResource( 1 )
+
+[node name="Muzzle" parent="Canon" index="0"]
+position = Vector2( 15.5338, -25.2425 )
+
+[node name="DetectArea" type="Area2D" parent="Canon" index="1"]
+position = Vector2( 15.694, -23.5922 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Canon/DetectArea" index="0"]
+position = Vector2( 152.435, -153.209 )
+rotation = -0.785398
+shape = SubResource( 2 )
+
