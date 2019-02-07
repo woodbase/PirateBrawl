@@ -9,11 +9,11 @@
 radius = 17.5152
 height = 67.9444
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="CircleShape2D" id=2]
 
-extents = Vector2( 214.511, 21.2711 )
+radius = 84.3677
 
-[node name="PatrolBoat" instance=ExtResource( 1 )]
+[node name="PatrolBoat" index="0" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 
 [node name="Hull" parent="." index="0"]
@@ -25,14 +25,22 @@ region_rect = Rect2( 115, 549, 113, 66 )
 rotation = 1.5708
 shape = SubResource( 1 )
 
+[node name="Canon" parent="." index="2"]
+position = Vector2( 37.474, 0 )
+rotation = 1.5708
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 496, 564, 12, 20 )
+
 [node name="Muzzle" parent="Canon" index="0"]
-position = Vector2( 15.5338, -25.2425 )
+position = Vector2( 0.646881, -9.8422 )
 
-[node name="DetectArea" type="Area2D" parent="Canon" index="1"]
-position = Vector2( 15.694, -23.5922 )
+[node name="Area2D" type="Area2D" parent="." index="4"]
+position = Vector2( 91.8882, -1.02669 )
+__meta__ = {
+"_edit_group_": true
+}
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Canon/DetectArea" index="0"]
-position = Vector2( 152.435, -153.209 )
-rotation = -0.785398
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
 shape = SubResource( 2 )
 
