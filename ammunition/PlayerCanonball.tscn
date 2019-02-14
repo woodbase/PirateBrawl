@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://ammunition/Canonball.tscn" type="PackedScene" id=1]
+[ext_resource path="res://ammunition/PlayerCanonball.gd" type="Script" id=2]
+[ext_resource path="res://assets/shipsMiscellaneous_sheet.png" type="Texture" id=3]
+
+[sub_resource type="CircleShape2D" id=1]
+
+radius = 5.28484
+
+[node name="Canonball" instance=ExtResource( 1 )]
+collision_layer = 8
+script = ExtResource( 2 )
+speed = 200
+
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 422, 892, 11, 12 )
+
+[node name="CollisionShape2D" parent="." index="1"]
+shape = SubResource( 1 )
+

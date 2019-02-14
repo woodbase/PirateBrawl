@@ -9,11 +9,11 @@ var target = null
 func _ready():
 	if(Speed == 0):
 		Speed = 100
-	$Area2D/CollisionShape2D.shape.radius = detectRadius
+	$DetectRadius/CollisionShape2D.shape.radius = detectRadius
 
 func control(delta) -> void:
 	if(parent is PathFollow2D && Speed > 0):
-	#	parent.set_offset(parent.get_offset() + Speed * delta)
+		parent.set_offset(parent.get_offset() + Speed * delta)
 		position = Vector2()
 	else:
 		print("Parent is not pathfollow2d")
@@ -21,7 +21,6 @@ func control(delta) -> void:
 		pass
 
 func _on_Area2D_body_entered(body):
-	if(body.name == "Player"):
 		target = body
 
 func _on_Area2D_body_exited(body):

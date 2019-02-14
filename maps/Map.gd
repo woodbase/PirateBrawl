@@ -1,10 +1,5 @@
 extends Node2D
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	setCameraLimits()
 	
@@ -15,4 +10,8 @@ func setCameraLimits():
 	$Player/Camera2D.limit_right = map_limits.end.x * map_cellsize.x
 	$Player/Camera2D.limit_top = map_limits.position.y * map_cellsize.y
 	$Player/Camera2D.limit_bottom = map_limits.end.y * map_cellsize.y
-	
+
+func _on_ship_shoot(bullet, _position, _direction):
+	var b = bullet.instance()
+	add_child(b)
+	b.start(_position, _direction)
