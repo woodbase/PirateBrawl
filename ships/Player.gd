@@ -22,4 +22,4 @@ func control(delta):
 	if(!Input.is_action_pressed("ui_backward") && currentSpeed < 0):
 		currentSpeed += 2
 		
-	velocity = Vector2(currentSpeed, 0).rotated(rotation)
+	velocity = Vector2(clamp(currentSpeed,-MAX_SPEED,MAX_SPEED), 0).rotated(rotation)

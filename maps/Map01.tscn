@@ -34,7 +34,7 @@ curve = SubResource( 1 )
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Paths/CenterPath"]
 position = Vector2( 255.238, 338.62 )
-rotation = -0.302148
+rotation = -0.302155
 
 [node name="PatrolBoat" parent="Paths/CenterPath/PathFollow2D" instance=ExtResource( 4 )]
 Speed = 100

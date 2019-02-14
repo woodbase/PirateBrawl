@@ -13,7 +13,7 @@ height = 67.9444
 
 radius = 84.3677
 
-[node name="PatrolBoat" index="0" instance=ExtResource( 1 )]
+[node name="PatrolBoat" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 
 [node name="Hull" parent="." index="0"]
@@ -26,9 +26,11 @@ rotation = 1.5708
 shape = SubResource( 1 )
 
 [node name="Canon" parent="." index="2"]
-position = Vector2( 37.474, 0 )
+position = Vector2( 37, 0 )
 rotation = 1.5708
+scale = Vector2( 1, 0.927004 )
 texture = ExtResource( 3 )
+offset = Vector2( 0, -8 )
 region_enabled = true
 region_rect = Rect2( 496, 564, 12, 20 )
 
@@ -44,3 +46,5 @@ __meta__ = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
 shape = SubResource( 2 )
 
+[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_Area2D_body_exited"]
