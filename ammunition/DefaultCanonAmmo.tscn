@@ -8,6 +8,7 @@
 radius = 6.06185
 
 [node name="Canonball" instance=ExtResource( 1 )]
+speed = 200
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 2 )

@@ -14,9 +14,9 @@ func control(delta):
 	rotation += RotationSpeed * rotationDirection * delta
 	
 	if(Input.is_action_pressed("ui_forward") && currentSpeed < MAX_SPEED):
-		currentSpeed += Speed
+		currentSpeed += MaxSpeed
 	if(Input.is_action_pressed("ui_backward") && currentSpeed < MAX_SPEED/2):
-		currentSpeed = -Speed/2.0
+		currentSpeed = -MaxSpeed/2.0
 	if(!Input.is_action_pressed("ui_forward") && currentSpeed > 0):
 		currentSpeed -= 2
 	if(!Input.is_action_pressed("ui_backward") && currentSpeed < 0):

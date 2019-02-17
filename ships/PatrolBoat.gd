@@ -3,17 +3,25 @@ extends "res://ships/Ship.gd"
 onready var parent = get_parent()
 export var canonRotationSpeed : float = 100.0
 export var detectRadius : int = 200
+var speed = 0
 
 var target = null
 
 func _ready():
-	if(Speed == 0):
-		Speed = 100
+	if(MaxSpeed == 0):
+		MaxSpeed = 100
+	var circle = CircleShape2D.new()
+	$DetectRadius/CollisionShape2D.shape = circle 
 	$DetectRadius/CollisionShape2D.shape.radius = detectRadius
 
 func control(delta) -> void:
-	if(parent is PathFollow2D && Speed > 0):
-		parent.set_offset(parent.get_offset() + Speed * delta)
+	if($LookAhead1.is_colliding() || $LookAhead2.is_colliding()):
+		print('collision detected')
+		speed = lerp(speed, 0, 0.01)
+	else:
+		speed = lerp(speed, MaxSpeed, 0.07)
+	if(parent is PathFollow2D && MaxSpeed > 0):
+		parent.set_offset(parent.get_offset() + speed * delta)
 		position = Vector2()
 	else:
 		print("Parent is not pathfollow2d")
@@ -33,3 +41,5 @@ func _process(delta):
 		var current_dir = Vector2(1,0).rotated($Canon.global_rotation)
 		$Canon.global_rotation = current_dir.linear_interpolate(targetDirection, canonRotationSpeed*delta).angle()+1.5
 		$Canon.rotation = clamp($Canon.rotation, 0, 3.14)
+		if(targetDirection.dot(current_dir)>0.9):
+			shoot()

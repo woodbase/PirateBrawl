@@ -4,7 +4,7 @@ signal hp_update
 signal died
 signal shoot
 
-export var Speed : int
+export var MaxSpeed : int
 export var Health : int
 export var Bullet : PackedScene
 export var CanonReload : float

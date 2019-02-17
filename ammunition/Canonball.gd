@@ -28,7 +28,9 @@ func _on_LifeSpan_timeout():
 
 
 func _on_Canonball_body_entered(body):
-	print(body.name)
+	if(body.name == 'PatrolBoat'):
+		return
+	print('Hit ' + body.name)
 	explode()
 	if(body.has_method("takeDamage")):
 		body.takeDamage(damage)
