@@ -5,7 +5,7 @@ signal died
 signal shoot
 
 export var MaxSpeed : int
-export var Health : int
+export var MaxHealth : int
 export var Bullet : PackedScene
 export var CanonReload : float
 export var RotationSpeed: float
@@ -13,8 +13,11 @@ export var RotationSpeed: float
 var velocity : Vector2 = Vector2()
 var canShoot : bool = true
 var alive : bool = true
+var health : float
 
 func _ready() -> void:
+	health = MaxHealth
+	emit_signal("hp_update", health * 100/MaxHealth)
 	$CanonTimer.wait_time = CanonReload
 
 func shoot() -> void:
@@ -33,6 +36,14 @@ func _physics_process(delta) -> void:
 	control(delta)
 	move_and_slide(velocity)
 
+func takeDamage(amount : int) -> void:
+	health-= amount
+	emit_signal("hp_update", health * 100/MaxHealth)
+	if(health <= 0):
+		sink()
+
+func sink():
+	queue_free()
 
 func _on_CanonTimer_timeout():
 	canShoot = true

@@ -3,6 +3,7 @@
 [ext_resource path="res://ammunition/Canonball.gd" type="Script" id=1]
 
 [node name="Canonball" type="Area2D"]
+collision_layer = 7
 collision_mask = 4
 script = ExtResource( 1 )
 speed = 1

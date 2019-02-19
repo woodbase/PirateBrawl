@@ -2,6 +2,7 @@ extends "res://ships/Ship.gd"
 
 var MAX_SPEED : float = 200
 var currentSpeed : float = 0.0
+export var canonRotationSpeed : float = 100.0
 
 func control(delta):
 	#$Canon.look_at(get_global_mouse_position())

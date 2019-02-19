@@ -16,7 +16,6 @@ func _ready():
 
 func control(delta) -> void:
 	if($LookAhead1.is_colliding() || $LookAhead2.is_colliding()):
-		print('collision detected')
 		speed = lerp(speed, 0, 0.01)
 	else:
 		speed = lerp(speed, MaxSpeed, 0.07)
