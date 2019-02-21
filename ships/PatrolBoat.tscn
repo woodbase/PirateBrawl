@@ -5,7 +5,6 @@
 [ext_resource path="res://assets/shipsMiscellaneous_sheet.png" type="Texture" id=3]
 
 [sub_resource type="CapsuleShape2D" id=1]
-
 radius = 17.5152
 height = 67.9444
 
@@ -33,7 +32,7 @@ region_enabled = true
 region_rect = Rect2( 496, 564, 12, 20 )
 
 [node name="Muzzle" parent="Canon" index="0"]
-position = Vector2( 0.646881, -9.8422 )
+position = Vector2( 0.646856, -17.42 )
 
 [node name="DetectRadius" type="Area2D" parent="." index="4"]
 position = Vector2( 91.8882, -1.02669 )

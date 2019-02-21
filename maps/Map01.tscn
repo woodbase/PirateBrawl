@@ -1,13 +1,13 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://maps/Map.gd" type="Script" id=1]
 [ext_resource path="res://assets/ground.tres" type="TileSet" id=2]
 [ext_resource path="res://ships/Player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://ships/PatrolBoat.tscn" type="PackedScene" id=4]
 [ext_resource path="res://ammunition/DefaultCanonAmmo.tscn" type="PackedScene" id=5]
+[ext_resource path="res://ui/HUD.tscn" type="PackedScene" id=6]
 
 [sub_resource type="Curve2D" id=1]
-
 _data = {
 "points": PoolVector2Array( -172.32, 53.4802, 172.32, -53.4802, 255.238, 338.62, -159.237, -22.8537, 159.237, 22.8537, 635.468, 262.807, -97.9275, -123.911, 97.9275, 123.911, 942.219, 435.427, 115.775, -140.906, -115.775, 140.906, 1070.16, 864.235, 91.6463, 27.2075, -91.6463, -27.2075, 544.621, 788.349, 44.0665, 80.2976, -44.0665, -80.2976, 241.269, 592.735, 1.39269, 82.7642, -1.39269, -82.7642, 193.421, 452.922, 0, 0, 0, 0, 255.238, 338.62 )
 }
@@ -46,5 +46,8 @@ Bullet = ExtResource( 5 )
 CanonReload = 0.5
 RotationSpeed = 10.0
 
+[node name="HUD" parent="." instance=ExtResource( 6 )]
+
+[connection signal="hp_update" from="Player" to="HUD" method="updateHealthBar"]
 [connection signal="shoot" from="Player" to="." method="_on_ship_shoot"]
 [connection signal="shoot" from="Paths/CenterPath/PathFollow2D/PatrolBoat" to="." method="_on_ship_shoot"]

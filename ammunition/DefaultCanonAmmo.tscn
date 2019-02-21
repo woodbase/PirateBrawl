@@ -4,10 +4,11 @@
 [ext_resource path="res://assets/shipsMiscellaneous_sheet.png" type="Texture" id=2]
 
 [sub_resource type="CircleShape2D" id=1]
-
 radius = 6.06185
 
-[node name="Canonball" instance=ExtResource( 1 )]
+[node name="Canonball" index="0" instance=ExtResource( 1 )]
+collision_layer = 8
+collision_mask = 2
 speed = 200
 
 [node name="Sprite" parent="." index="0"]

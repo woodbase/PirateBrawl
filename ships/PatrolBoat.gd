@@ -40,5 +40,5 @@ func _process(delta):
 		var current_dir = Vector2(1,0).rotated($Canon.global_rotation)
 		$Canon.global_rotation = current_dir.linear_interpolate(targetDirection, canonRotationSpeed*delta).angle()+1.5
 		$Canon.rotation = clamp($Canon.rotation, 0, 3.14)
-		if(targetDirection.dot(current_dir)>0.9):
+		if(targetDirection.dot(current_dir)>0.1):
 			shoot()
