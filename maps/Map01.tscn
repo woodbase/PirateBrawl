@@ -1,15 +1,28 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://maps/Map.gd" type="Script" id=1]
 [ext_resource path="res://assets/ground.tres" type="TileSet" id=2]
 [ext_resource path="res://ships/Player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://ships/PatrolBoat.tscn" type="PackedScene" id=4]
 [ext_resource path="res://ammunition/DefaultCanonAmmo.tscn" type="PackedScene" id=5]
-[ext_resource path="res://ui/HUD.tscn" type="PackedScene" id=6]
+[ext_resource path="res://ships/PatrolBoat2.tscn" type="PackedScene" id=6]
+[ext_resource path="res://ui/HUD.tscn" type="PackedScene" id=7]
+[ext_resource path="res://enemies/GroundCanon.tscn" type="PackedScene" id=8]
+[ext_resource path="res://ammunition/SlowCanonAmmo.tscn" type="PackedScene" id=9]
 
 [sub_resource type="Curve2D" id=1]
 _data = {
 "points": PoolVector2Array( -172.32, 53.4802, 172.32, -53.4802, 255.238, 338.62, -159.237, -22.8537, 159.237, 22.8537, 635.468, 262.807, -97.9275, -123.911, 97.9275, 123.911, 942.219, 435.427, 115.775, -140.906, -115.775, 140.906, 1070.16, 864.235, 91.6463, 27.2075, -91.6463, -27.2075, 544.621, 788.349, 44.0665, 80.2976, -44.0665, -80.2976, 241.269, 592.735, 1.39269, 82.7642, -1.39269, -82.7642, 193.421, 452.922, 0, 0, 0, 0, 255.238, 338.62 )
+}
+
+[sub_resource type="Curve2D" id=2]
+_data = {
+"points": PoolVector2Array( 119.251, -57.8615, -119.251, 57.8615, 1585.93, 1047.12, -169.306, 95.142, 169.306, -95.142, 1244.33, 928.22, -108.651, 90.3594, 108.651, -90.3594, 1432.91, 735.647, 129.851, 121.34, -129.851, -121.34, 1281.18, 397.861, -18.5502, 169.602, 18.5502, -169.602, 596.329, 26.2666, -151.052, 10.5203, 151.052, -10.5203, 1228.18, -314.996, -45.0505, -415.551, 45.0505, 415.551, 1705.18, 87.4038, 0, 0, 0, 0, 1823.71, 624.972, 294.153, -170.954, -294.153, 170.954, 1585.93, 1047.12 )
+}
+
+[sub_resource type="Curve2D" id=3]
+_data = {
+"points": PoolVector2Array( -172.246, 124.48, 172.246, -124.48, 346.859, -16.6395, 155.841, 190.178, -155.841, -190.178, 578.61, -307.464, 170.195, -114.83, -170.195, 114.83, -625.586, -359.722, -112.78, -196.736, 112.78, 196.736, -636.947, 1014.88, -172.246, 57.4152, 172.246, -57.4152, -177.989, 1110.31, -454.114, 259.738, 454.114, -259.738, 519.537, 1073.95, -721.791, 355, 721.791, -355, 346.859, -16.6395 )
 }
 
 [node name="Map01" type="Node2D"]
@@ -28,9 +41,11 @@ tile_data = PoolIntArray( -393229, 0, 262152, -393228, 0, 262152, -393227, 0, 26
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
 MaxHealth = 100
+CanonReload = 0.7
 RotationSpeed = 10.0
 
 [node name="Paths" type="Node" parent="."]
+editor/display_folded = true
 
 [node name="CenterPath" type="Path2D" parent="Paths"]
 curve = SubResource( 1 )
@@ -43,11 +58,52 @@ rotation = -0.302155
 MaxSpeed = 100
 MaxHealth = 100
 Bullet = ExtResource( 5 )
-CanonReload = 0.5
+CanonReload = 0.75
 RotationSpeed = 10.0
 
-[node name="HUD" parent="." instance=ExtResource( 6 )]
+[node name="RightPath" type="Path2D" parent="Paths"]
+position = Vector2( -198.448, -26.5182 )
+scale = Vector2( 1, 1.02647 )
+curve = SubResource( 2 )
 
+[node name="PathFollow2D" type="PathFollow2D" parent="Paths/RightPath"]
+position = Vector2( 1585.93, 1047.12 )
+rotation = 2.70885
+
+[node name="PatrolBoat2" parent="Paths/RightPath/PathFollow2D" instance=ExtResource( 6 )]
+CanonReload = 0.9
+
+[node name="LeftLargePath" type="Path2D" parent="Paths"]
+position = Vector2( 11.6847, 101.806 )
+scale = Vector2( 0.92964, 0.859012 )
+curve = SubResource( 3 )
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Paths/LeftLargePath"]
+position = Vector2( 346.859, -16.6395 )
+rotation = -0.621274
+
+[node name="PatrolBoat2" parent="Paths/LeftLargePath/PathFollow2D" instance=ExtResource( 4 )]
+position = Vector2( -239.166, 188.295 )
+rotation = 0.295935
+scale = Vector2( 1.08381, 1.15657 )
+MaxSpeed = 100
+MaxHealth = 100
+Bullet = ExtResource( 5 )
+CanonReload = 0.8
+RotationSpeed = 10.0
+
+[node name="HUD" parent="." instance=ExtResource( 7 )]
+
+[node name="GroundCanon" parent="." instance=ExtResource( 8 )]
+position = Vector2( -181.765, -413.756 )
+rotation = 1.5708
+z_index = 10
+Bullet = ExtResource( 9 )
+
+[connection signal="died" from="Player" to="." method="_on_Player_died"]
 [connection signal="hp_update" from="Player" to="HUD" method="updateHealthBar"]
 [connection signal="shoot" from="Player" to="." method="_on_ship_shoot"]
 [connection signal="shoot" from="Paths/CenterPath/PathFollow2D/PatrolBoat" to="." method="_on_ship_shoot"]
+[connection signal="shoot" from="Paths/RightPath/PathFollow2D/PatrolBoat2" to="." method="_on_ship_shoot"]
+[connection signal="shoot" from="Paths/LeftLargePath/PathFollow2D/PatrolBoat2" to="." method="_on_ship_shoot"]
+[connection signal="shoot" from="GroundCanon" to="." method="_on_ship_shoot"]

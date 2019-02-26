@@ -15,20 +15,18 @@ func _ready():
 	$DetectRadius/CollisionShape2D.shape.radius = detectRadius
 
 func control(delta) -> void:
-	if($LookAhead1.is_colliding() || $LookAhead2.is_colliding()):
-		speed = lerp(speed, 0, 0.01)
-	else:
-		speed = lerp(speed, MaxSpeed, 0.07)
 	if(parent is PathFollow2D && MaxSpeed > 0):
+		if($LookAhead1.is_colliding() || $LookAhead2.is_colliding()):
+			speed = lerp(speed, 0, 0.01)
+		else:
+			speed = lerp(speed, MaxSpeed, 0.07)
 		parent.set_offset(parent.get_offset() + speed * delta)
 		position = Vector2()
 	else:
-		print("Parent is not pathfollow2d")
-		#do something else
 		pass
 
 func _on_Area2D_body_entered(body):
-		target = body
+	target = body
 
 func _on_Area2D_body_exited(body):
 	if(body == target):

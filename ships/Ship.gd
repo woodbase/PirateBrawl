@@ -26,6 +26,7 @@ func shoot() -> void:
 		$CanonTimer.start()
 		var dir = Vector2(1,0).rotated($Canon.global_rotation-1.5)
 		emit_signal("shoot", Bullet, $Canon/Muzzle.global_position, dir)
+		$AnimationPlayer.play("muzzle_flash")
 
 func control(delta) -> void:
 	pass
@@ -40,10 +41,20 @@ func takeDamage(amount : int) -> void:
 	health-= amount
 	emit_signal("hp_update", health * 100/MaxHealth)
 	if(health <= 0):
+		emit_signal("died")
 		sink()
 
 func sink():
-	queue_free()
+	$CollisionShape2D.disabled = true
+	alive = false
+	$Canon.hide()
+	$Hull.hide()
+	$Explosion.show()
+	$Explosion.play()
 
 func _on_CanonTimer_timeout():
 	canShoot = true
+
+
+func _on_Explosion_animation_finished():
+	queue_free()
