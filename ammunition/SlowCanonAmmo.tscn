@@ -10,19 +10,21 @@ radius = 6.06185
 
 [sub_resource type="CanvasItemMaterial" id=3]
 particles_animation = true
-particles_anim_h_frames = 24
-particles_anim_v_frames = 1
+particles_anim_h_frames = 1
+particles_anim_v_frames = 24
 particles_anim_loop = false
 
 [sub_resource type="Curve" id=4]
-_data = [ Vector2( 0, 0.0159999 ), 0.0, 0.0, 0, 0, Vector2( 0.999713, 0.4912 ), 0.0, 0.0, 0, 0 ]
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.7024 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="CurveTexture" id=5]
 curve = SubResource( 4 )
 
 [sub_resource type="ParticlesMaterial" id=2]
+emission_shape = 1
+emission_sphere_radius = 5.13
 flag_disable_z = true
-gravity = Vector3( 0, 0, 0 )
+gravity = Vector3( 0, 98, 0 )
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 scale_curve = SubResource( 5 )
@@ -47,6 +49,7 @@ material = SubResource( 3 )
 rotation = 1.5708
 amount = 34
 lifetime = 0.4
+local_coords = false
 process_material = SubResource( 2 )
 texture = ExtResource( 4 )
 
