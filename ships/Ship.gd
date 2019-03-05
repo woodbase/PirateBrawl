@@ -3,12 +3,14 @@ extends KinematicBody2D
 signal hp_update
 signal died
 signal shoot
+signal ammo_updated
 
 export var MaxSpeed : int
 export var MaxHealth : int
 export var Bullet : PackedScene
 export var CanonReload : float
 export var RotationSpeed: float
+export var AmmoAmount: int = -1 setget setAmmo
 
 var velocity : Vector2 = Vector2()
 var canShoot : bool = true
@@ -21,7 +23,9 @@ func _ready() -> void:
 	$CanonTimer.wait_time = CanonReload
 
 func shoot() -> void:
-	if(canShoot):
+	if(canShoot and AmmoAmount != 0):
+		if(AmmoAmount != -1):
+			self.AmmoAmount -= 1
 		canShoot = false
 		$CanonTimer.start()
 		var dir = Vector2(1,0).rotated($Canon.global_rotation-1.5)
@@ -44,6 +48,10 @@ func takeDamage(amount : int) -> void:
 		emit_signal("died")
 		sink()
 
+func heal(amount : int) -> void:
+	health = clamp(health+amount, 0.0, 100.0)
+	emit_signal("hp_update", health * 100/MaxHealth)
+	
 func sink():
 	$CollisionShape2D.disabled = true
 	alive = false
@@ -55,6 +63,9 @@ func sink():
 func _on_CanonTimer_timeout():
 	canShoot = true
 
+func setAmmo(amount : int) -> void:
+	AmmoAmount = amount
+	emit_signal("ammo_updated", AmmoAmount)
 
 func _on_Explosion_animation_finished():
 	queue_free()

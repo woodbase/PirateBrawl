@@ -1,13 +1,18 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://HUD.gd" type="Script" id=1]
 [ext_resource path="res://assets/sailLarge (12).png" type="Texture" id=2]
 [ext_resource path="res://assets/ui/glassPanel_200.png" type="Texture" id=3]
 [ext_resource path="res://assets/ui/barHorizontal_red_mid 200.png" type="Texture" id=4]
-[ext_resource path="res://assets/ui/barHorizontal_white_mid 200.png" type="Texture" id=5]
+[ext_resource path="res://assets/crosshairs/crosshair183.png" type="Texture" id=5]
+[ext_resource path="res://assets/Treamd.ttf" type="DynamicFontData" id=6]
+[ext_resource path="res://assets/ui/barHorizontal_white_mid 200.png" type="Texture" id=7]
 
-[sub_resource type="Animation" id=1]
-resource_name = "healthbar_flash"
+[sub_resource type="DynamicFont" id=1]
+size = 32
+font_data = ExtResource( 6 )
+
+[sub_resource type="Animation" id=2]
 length = 0.2
 step = 0.05
 tracks/0/type = "value"
@@ -20,7 +25,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.05, 0.1, 0.15, 0.2 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 4 ) ]
+"values": [ ExtResource( 4 ), ExtResource( 7 ), ExtResource( 4 ), ExtResource( 7 ), ExtResource( 4 ) ]
 }
 
 [node name="HUD" type="CanvasLayer"]
@@ -53,7 +58,40 @@ texture_progress = ExtResource( 4 )
 
 [node name="Tween" type="Tween" parent="Margin/Container/HealthBar"]
 
+[node name="VSeparator" type="VSeparator" parent="Margin/Container"]
+margin_left = 274.0
+margin_right = 314.0
+margin_bottom = 600.0
+rect_min_size = Vector2( 40, 0 )
+
+[node name="CenterContainer" type="CenterContainer" parent="Margin/Container"]
+margin_left = 318.0
+margin_right = 318.0
+size_flags_vertical = 0
+use_top_left = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Margin/Container/CenterContainer"]
+margin_left = -47.0
+margin_top = -32.0
+margin_right = 47.0
+margin_bottom = 32.0
+
+[node name="TextureRect" type="TextureRect" parent="Margin/Container/CenterContainer/HBoxContainer"]
+margin_right = 64.0
+margin_bottom = 64.0
+texture = ExtResource( 5 )
+
+[node name="AmmoLabel" type="Label" parent="Margin/Container/CenterContainer/HBoxContainer"]
+margin_left = 68.0
+margin_top = 15.0
+margin_right = 94.0
+margin_bottom = 48.0
+custom_fonts/font = SubResource( 1 )
+text = "10"
+align = 1
+valign = 1
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/healthbar_flash = SubResource( 1 )
+anims/healthbar_flash = SubResource( 2 )
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

@@ -3,6 +3,9 @@
 importer="texture"
 type="StreamTexture"
 path="res://.import/crossair_red.png-9a4e1fa54c2402dacbc8bc8250a271e0.stex"
+metadata={
+"vram_texture": false
+}
 
 [deps]
 

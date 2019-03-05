@@ -9,6 +9,9 @@ var yellow_sail = preload("res://assets/sailLarge (6).png")
 var barTexture
 var sailTexture 
 
+func updateAmmo(value : int) -> void:
+	$Margin/Container/CenterContainer/HBoxContainer/AmmoLabel.text = str(value)
+
 func updateHealthBar(value : int) -> void:
 	barTexture = green_bar
 	sailTexture = green_sail

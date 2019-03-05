@@ -23,7 +23,6 @@ func explode() -> void:
 	queue_free()
 
 func _on_LifeSpan_timeout():
-	print('Timeout')
 	explode()
 
 

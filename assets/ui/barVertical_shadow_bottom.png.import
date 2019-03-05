@@ -3,6 +3,9 @@
 importer="texture"
 type="StreamTexture"
 path="res://.import/barVertical_shadow_bottom.png-1fc3b973d8983f1dc4d66fdd20f21e9c.stex"
+metadata={
+"vram_texture": false
+}
 
 [deps]
 

@@ -3,6 +3,9 @@
 importer="texture"
 type="StreamTexture"
 path="res://.import/red_boxCross.png-c5269fcadd3048b512aa6f972eb2fc44.stex"
+metadata={
+"vram_texture": false
+}
 
 [deps]
 
